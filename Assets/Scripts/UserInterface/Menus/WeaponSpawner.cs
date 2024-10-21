@@ -20,7 +20,13 @@ namespace UserInterface.Menus
         private GameObject _weaponPreview;
         private GameObject _sightPreview;
         private GameObject _magPreview;
-        
+        private ItemManager _itemManager;
+
+        private void Awake()
+        {
+            _itemManager = ItemManager.Instance;
+        }
+
         private void Start()
         {
            MakeOptionsFromList();
@@ -31,7 +37,7 @@ namespace UserInterface.Menus
             weaponDropdown.ClearOptions();
             List<string> weaponOptions = new List<string>();
             weaponOptions.Add("Not Chosen");
-            foreach (WeaponData weapon in WeaponFactory.Weapons)
+            foreach (WeaponData weapon in _itemManager.weapons)
             {
                 weaponOptions.Add(weapon.displayName);
             }
@@ -40,7 +46,7 @@ namespace UserInterface.Menus
             sightDropdown.ClearOptions();
             List<string> sightOptions = new List<string>();
             sightOptions.Add("Not Chosen");
-            foreach (GameObject sight in WeaponFactory.SightPrefabs)
+            foreach (GameObject sight in _itemManager.sights)
             {
                 sightOptions.Add(sight.name);
             }
@@ -49,7 +55,7 @@ namespace UserInterface.Menus
             magDropdown.ClearOptions();
             List<string> magOptions = new List<string>();
             magOptions.Add("Not Chosen");
-            foreach (MagData mag in WeaponFactory.Mags)
+            foreach (MagData mag in _itemManager.mags)
             {
                 magOptions.Add(mag.displayName);
             }
@@ -63,7 +69,7 @@ namespace UserInterface.Menus
                 int index = option - 1;
                 if (_weaponPreview != null) Destroy(_weaponPreview);
                 Debug.Log("Showing Weapon Preview");
-                _weaponPreview = Instantiate(WeaponFactory.Weapons[index].modelPrefab, weaponPreviewPosition);
+                _weaponPreview = Instantiate(_itemManager.weapons[index].modelPrefab, weaponPreviewPosition);
                 Helper.SetLayerRecursively(_weaponPreview, "Preview", "Default");
             }
             else if (_weaponPreview != null) Destroy(_weaponPreview);
@@ -78,7 +84,7 @@ namespace UserInterface.Menus
                 {
                     if (_sightPreview != null) Destroy(_sightPreview);
                     GameObject sightPos = Helper.FindChildWithTag(_weaponPreview, "SightAttachmentPoint");
-                    _sightPreview = Instantiate(WeaponFactory.SightPrefabs[index], sightPos.transform);
+                    _sightPreview = Instantiate(_itemManager.sights[index], sightPos.transform);
                     Helper.SetLayerRecursively(_sightPreview, "Preview", "Default");
                 }
             }
@@ -94,7 +100,7 @@ namespace UserInterface.Menus
                 {
                     if (_magPreview != null) Destroy(_magPreview);
                     GameObject magPos = Helper.FindChildWithTag(_weaponPreview, "MagAttachmentPoint");
-                    _magPreview = Instantiate(WeaponFactory.Mags[index].modelPrefab, magPos.transform);
+                    _magPreview = Instantiate(_itemManager.mags[index].modelPrefab, magPos.transform);
                     Helper.SetLayerRecursively(_magPreview, "Preview", "Default");
                 }
             }

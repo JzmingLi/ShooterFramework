@@ -12,8 +12,8 @@ namespace Player
     {
         [SerializeField] private InputActionAsset input;
         [SerializeField] private PlayerCamera playerCamera;
-        [SerializeField] private HUDManager hudManager;
         
+        private HUDManager _hudManager;
         private PlayerMovement _playerMovement;
         private WeaponController _weaponController;
         
@@ -27,6 +27,7 @@ namespace Player
         {
             input.Enable();
             
+            _hudManager = HUDManager.Instance;
             playerCamera.Input = input;
             
             _playerMovement = GetComponent<PlayerMovement>();
@@ -56,7 +57,7 @@ namespace Player
             {
                 Debug.Log("Menu Opened");
                 Cursor.lockState = CursorLockMode.Confined;
-                hudManager.ShowWeaponSpawner();
+                _hudManager.ShowWeaponSpawner();
                 input.FindActionMap("Player").Disable();
                 input.FindActionMap("UI").Enable();
                 
@@ -65,7 +66,7 @@ namespace Player
             {
                 Debug.Log("Menu Closed");
                 Cursor.lockState = CursorLockMode.Locked;
-                hudManager.CloseWeaponSpawner();
+                _hudManager.CloseWeaponSpawner();
                 input.FindActionMap("Player").Enable();
                 input.FindActionMap("UI").Disable();
             }

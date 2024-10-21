@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using SingletonPattern;
 using UnityEngine;
 using WeaponFramework.Factories;
 
 namespace WeaponFramework
 {
-    public class ItemManager : MonoBehaviour
+    public class ItemManager : Singleton<ItemManager>
     {
-        [SerializeField] private List<WeaponData> weapons;
-        [SerializeField] private List<GameObject> sights;
-        [SerializeField] private List<MagData> mags;
-        [SerializeField] private List<AmmoType> ammoTypes;
-
-        private void Start()
-        {
-            WeaponFactory.UpdateLists(weapons,sights,mags, ammoTypes);
-        }
+        [SerializeField] public List<WeaponData> weapons;
+        [SerializeField] public List<GameObject> sights;
+        [SerializeField] public List<MagData> mags;
+        [SerializeField] public List<AmmoType> ammoTypes;
     }
 }

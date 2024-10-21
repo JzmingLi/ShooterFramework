@@ -632,58 +632,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &1373620721726815508
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4613413086000839940}
-  - component: {fileID: 5949949804610841673}
-  m_Layer: 0
-  m_Name: ItemManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4613413086000839940
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1373620721726815508}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -860.8562, y: -520.16437, z: -256.83688}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8793979813761988142}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5949949804610841673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1373620721726815508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5260665a00944558b328240c8d4ef21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 11400000, guid: 67229f1fdf0075d46811c6b64c97a1b0, type: 2}
-  sights:
-  - {fileID: 8986830380533708135, guid: 81e058c6d21bdf44191a61b9105c9154, type: 3}
-  - {fileID: 4569726382717682222, guid: 1d126fa6f16423b4abeb5573fbdad5c5, type: 3}
-  mags:
-  - {fileID: 11400000, guid: 657a0b697ee511147bf5eb65ea3b28f8, type: 2}
-  - {fileID: 11400000, guid: 2a5882f31d3d2704db6d0cd316de9b19, type: 2}
 --- !u!1 &1414171152074657057
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,7 +701,6 @@ RectTransform:
   - {fileID: 9200967576837620445}
   - {fileID: 9211188432703917201}
   - {fileID: 4463738368877299297}
-  - {fileID: 4613413086000839940}
   - {fileID: 8761206027508509865}
   - {fileID: 6348968679737061654}
   m_Father: {fileID: 0}

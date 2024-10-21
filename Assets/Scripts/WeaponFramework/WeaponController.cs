@@ -64,7 +64,7 @@ namespace WeaponFramework
                     if (round)
                     {
                         GameObject bullet = Instantiate(round.projectilePrefab, _weapon.Muzzle.position, mainCamera.transform.rotation);
-                        bullet.GetComponent<Rigidbody>().linearVelocity = mainCamera.transform.forward * 50f;
+                        bullet.GetComponent<Rigidbody>().linearVelocity = _weapon.Muzzle.transform.forward * 50f;
                         Destroy(bullet, 5f);
                         _timeUntilNextShoot = 1 / (_weapon.FireRate / 60);
                     }

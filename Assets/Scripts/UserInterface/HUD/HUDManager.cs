@@ -1,10 +1,11 @@
 ﻿using System;
+using SingletonPattern;
 using UnityEngine;
 using UserInterface.Menus;
 
 namespace UserInterface.HUD
 {
-    public class HUDManager : MonoBehaviour
+    public class HUDManager : Singleton<HUDManager>
     {
         [SerializeField] private WeaponSpawner weaponSpawner;
 

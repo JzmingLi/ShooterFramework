@@ -5,6 +5,6 @@ using WeaponFramework;
 public class AmmoType : ScriptableObject
 {
     public CartridgeSize cartridgeSize;
-    
+    public GameObject projectilePrefab;
     // In the future add stuff like damage and velocity
 }

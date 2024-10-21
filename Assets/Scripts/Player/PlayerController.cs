@@ -21,7 +21,7 @@ namespace Player
         private InputAction _aim;
         private InputAction _openMenu;
         private InputAction _closeMenu;
-        
+        private InputAction _shoot;
         
         private void Awake()
         {
@@ -68,6 +68,8 @@ namespace Player
                 input.FindActionMap("Player").Enable();
                 input.FindActionMap("UI").Disable();
             }
+            
+            if (_)
         }
     }
 }

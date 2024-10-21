@@ -4,6 +4,7 @@ using UnityEngine;
 using WeaponFramework.Factories;
 using HelperClasses;
 using TMPro;
+using WeaponFramework;
 
 namespace UserInterface.Menus
 {
@@ -14,7 +15,8 @@ namespace UserInterface.Menus
         [SerializeField] private TMP_Dropdown magDropdown;
 
         [SerializeField] private Transform weaponPreviewPosition;
-
+        [SerializeField] private WeaponController player;
+        
         private GameObject _weaponPreview;
         private GameObject _sightPreview;
         private GameObject _magPreview;
@@ -99,9 +101,16 @@ namespace UserInterface.Menus
             else if (_magPreview != null) Destroy(_magPreview);
         }
 
+        // For now directly assembles weapons and places it into the weapon controller
         public void SpawnWeapon()
         {
-            
+            if (!(weaponDropdown.value == 0 || sightDropdown.value == 0 || magDropdown.value == 0))
+            {
+                GameObject model = Instantiate(_weaponPreview);
+                Helper.SetLayerRecursively(model, "Default", "Preview");
+                Weapon weapon = WeaponFactory.AssembleWeapon(weaponDropdown.value - 1, magDropdown.value - 1, model);
+                player.SwitchWeapon(weapon);
+            }
         }
     }
 }

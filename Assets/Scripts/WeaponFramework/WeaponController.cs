@@ -1,3 +1,4 @@
+using Unity.Hierarchy;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,8 +12,9 @@ namespace WeaponFramework
         [SerializeField] private GameObject viewmodel;
         public Transform aimPoint;
         
-        public Vector3 idlePosition;
-        public Vector3 aimPosition;
+        public Vector3 idleOffset;
+        public Vector3 aimOffset;
+        public Vector3 sightPosition;
         
         [SerializeField] private float aimSpeed;
 
@@ -33,7 +35,7 @@ namespace WeaponFramework
         // Update is called once per frame
         void Update()
         {
-            _stateMachine.Update();
+            if(_weapon != null) _stateMachine.Update();
         }
         
         public void ToggleAim()
@@ -51,6 +53,19 @@ namespace WeaponFramework
         public void UpdateViewmodelPosition(Vector3 newPosition)
         {
             _viewpos.localPosition = Vector3.Lerp(_viewpos.localPosition, newPosition, Time.deltaTime * aimSpeed);
+        }
+        
+        // For now basically throws current weapon into limbo for garbage colletion
+        public void SwitchWeapon(Weapon weapon)
+        {
+            _weapon = weapon;
+            foreach (Transform child in viewmodel.transform)
+            {
+                Destroy(child.gameObject);
+            }
+            aimPoint = weapon.AimPoint;
+            _weapon.Model.transform.SetParent(viewmodel.transform, false);
+            sightPosition = -viewmodel.transform.InverseTransformPoint(aimPoint.position);
         }
     }
 }

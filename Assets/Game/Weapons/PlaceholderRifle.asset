@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6360f5bac7f644b81ea9fbbeb9c7d1, type: 3}
   m_Name: PlaceholderRifle
   m_EditorClassIdentifier: 
-  weaponName: PlaceHolderRifle
+  displayName: PlaceholderRifle
   fireRate: 600
   cartridgeSize: 0
   fireMode: 0

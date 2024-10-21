@@ -19,7 +19,7 @@ namespace StatePattern
 
         public void Update()
         {
-            _aimPosition = -_weapon.aimPoint.localPosition + _weapon.aimPosition;
+            _aimPosition = _weapon.sightPosition + _weapon.aimOffset;
             _weapon.UpdateViewmodelPosition(_aimPosition);
         }
 

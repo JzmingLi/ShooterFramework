@@ -20,7 +20,7 @@ namespace StatePattern
 
         public void Update()
         {
-            _weapon.UpdateViewmodelPosition(_weapon.idlePosition);
+            _weapon.UpdateViewmodelPosition(_weapon.idleOffset);
         }
 
         public void Exit()

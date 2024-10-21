@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "OpenMenu",
+                    "type": "Button",
+                    "id": "c9ee4cdb-1b17-406c-9e09-68dc59b3203e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -492,6 +501,17 @@
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ef2bd35c-e696-4149-b5cc-e40b24756593",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "OpenMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -521,7 +541,7 @@
                     "name": "Cancel",
                     "type": "Button",
                     "id": "15cef263-9014-4fd5-94d9-4e4a6234a6ef",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -585,6 +605,15 @@
                     "type": "PassThrough",
                     "id": "9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be",
                     "expectedControlType": "Quaternion",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CloseMenu",
+                    "type": "Button",
+                    "id": "d56f1aaf-65b9-435b-b244-3f5391352999",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -1006,6 +1035,17 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "13b42b7b-586b-493f-93ba-967c40f1f9eb",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "CloseMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -19,11 +19,12 @@ namespace WeaponFramework.Factories
             Mags = newMags;
         }
         
-        // For now directly assembles weapons and places it into the weapon controller
-        public static void AssembleWeapon(int weaponIndex, int magIndex, GameObject model, WeaponController location)
+        // For efficient use with weapon spawner
+        public static Weapon AssembleWeapon(int weaponIndex, int magIndex, GameObject model)
         {
             Magazine magazine = new Magazine(Mags[magIndex], Helper.FindChildWithTag(model, "Magazine"));
             Weapon newWeapon = new Weapon(Weapons[weaponIndex], model, magazine);
+            return newWeapon;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace WeaponFramework
 
         private Transform _viewpos;
         private WeaponStateMachine _stateMachine;
-        private Weapon _weapon;
+        public Weapon Weapon {  get; private set; }
 
         private float _timeUntilNextShoot;
         
@@ -38,7 +38,7 @@ namespace WeaponFramework
         // Update is called once per frame
         void Update()
         {
-            if(_weapon != null) _stateMachine.Update();
+            if(Weapon != null) _stateMachine.Update();
         }
         
         // Commands
@@ -56,17 +56,17 @@ namespace WeaponFramework
 
         public void Shoot()
         {
-            if (_weapon != null)
+            if (Weapon != null)
             {
                 if (_timeUntilNextShoot == 0)
                 {
-                    AmmoType round = _weapon.Mag.TakeRound();
+                    AmmoType round = Weapon.Mag.TakeRound();
                     if (round)
                     {
-                        GameObject bullet = Instantiate(round.projectilePrefab, _weapon.Muzzle.position, mainCamera.transform.rotation);
-                        bullet.GetComponent<Rigidbody>().linearVelocity = _weapon.Muzzle.transform.forward * 50f;
+                        GameObject bullet = Instantiate(round.projectilePrefab, Weapon.Muzzle.position, mainCamera.transform.rotation);
+                        bullet.GetComponent<Rigidbody>().linearVelocity = Weapon.Muzzle.transform.forward * 50f;
                         Destroy(bullet, 5f);
-                        _timeUntilNextShoot = 1 / (_weapon.FireRate / 60);
+                        _timeUntilNextShoot = 1 / (Weapon.FireRate / 60);
                     }
                 }
                 else
@@ -85,14 +85,24 @@ namespace WeaponFramework
         // For now basically throws current weapon into limbo for garbage colletion
         public void SwitchWeapon(Weapon weapon)
         {
-            _weapon = weapon;
+            Weapon = weapon;
+            /*
             foreach (Transform child in viewmodel.transform)
             {
                 Destroy(child.gameObject);
             }
-            aimPoint = weapon.AimPoint;
-            _weapon.Model.transform.SetParent(viewmodel.transform, false);
-            sightPosition = -viewmodel.transform.InverseTransformPoint(aimPoint.position);
+            */
+            if(weapon != null)
+            {
+                aimPoint = weapon.AimPoint;
+                Weapon.Model.transform.SetParent(viewmodel.transform, false);
+                sightPosition = -viewmodel.transform.InverseTransformPoint(aimPoint.position);
+            }
+            else
+            {
+                
+                Debug.Log("Equipped Nothing");
+            }
         }
     }
 }

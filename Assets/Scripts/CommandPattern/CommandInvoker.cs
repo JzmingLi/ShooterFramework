@@ -4,20 +4,28 @@ using UnityEngine;
 
 namespace CommandPattern
 {
-    public class CommandBuffer
+    public class CommandInvoker
     {
-        private static Stack<ICommand> _undoStack = new Stack<ICommand>();
+        private static readonly int MAX_COMMANDS = 10;
+        private static List<ICommand> _undoList = new List<ICommand>();
         public static void ExecuteCommand(ICommand command)
         {
             command.Execute();
-            _undoStack.Push(command);
-        }
-        public static void CancelCommand()
-        {
-            if (_undoStack.Count > 0)
+            _undoList.Add(command);
+            if (_undoList.Count > MAX_COMMANDS)
             {
-                ICommand activeCommand = _undoStack.Pop();
-                activeCommand.Cancel();
+                ICommand deletedCommand = _undoList[0];
+                deletedCommand.ClearData();
+                _undoList.RemoveAt(0);
+            }
+        }
+        public static void UndoCommand()
+        {
+            if (_undoList.Count > 0)
+            {
+                ICommand activeCommand = _undoList[^1];
+                _undoList.Remove(activeCommand);
+                activeCommand.Undo();
             }
         }
     }

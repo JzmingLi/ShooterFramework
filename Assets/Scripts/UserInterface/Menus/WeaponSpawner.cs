@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using CommandPattern;
 using UnityEngine;
 using WeaponFramework.Factories;
 using HelperClasses;
 using TMPro;
 using WeaponFramework;
+using WeaponFramework.Commands;
 
 namespace UserInterface.Menus
 {
@@ -115,8 +117,15 @@ namespace UserInterface.Menus
                 GameObject model = Instantiate(_weaponPreview);
                 Helper.SetLayerRecursively(model, "Default", "Preview");
                 Weapon weapon = WeaponFactory.AssembleWeapon(weaponDropdown.value - 1, magDropdown.value - 1, model);
-                player.SwitchWeapon(weapon);
+                //player.SwitchWeapon(weapon);
+                EquipCommand command = new EquipCommand(weapon, player);
+                CommandInvoker.ExecuteCommand(command);
             }
+        }
+
+        public void Undo()
+        {
+            CommandInvoker.UndoCommand();
         }
     }
 }

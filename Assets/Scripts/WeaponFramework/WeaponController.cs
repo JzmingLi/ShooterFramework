@@ -56,23 +56,25 @@ namespace WeaponFramework
 
         public void Shoot()
         {
-            if (_timeUntilNextShoot == 0)
+            if (_weapon != null)
             {
-                AmmoType round = _weapon.Mag.TakeRound();
-                if (round != null)
+                if (_timeUntilNextShoot == 0)
                 {
-                    GameObject bullet = Instantiate(round.projectilePrefab, _weapon.Muzzle.position, _weapon.Muzzle.rotation);
-                    bullet.GetComponent<Rigidbody>().linearVelocity = Vector3.forward * 10f;
-                    Destroy(bullet, 5f);
-                    _timeUntilNextShoot = 1 / (_weapon.FireRate / 60);
+                    AmmoType round = _weapon.Mag.TakeRound();
+                    if (round)
+                    {
+                        GameObject bullet = Instantiate(round.projectilePrefab, _weapon.Muzzle.position, mainCamera.transform.rotation);
+                        bullet.GetComponent<Rigidbody>().linearVelocity = mainCamera.transform.forward * 50f;
+                        Destroy(bullet, 5f);
+                        _timeUntilNextShoot = 1 / (_weapon.FireRate / 60);
+                    }
+                }
+                else
+                {
+                    _timeUntilNextShoot -= Time.deltaTime;
+                    if (_timeUntilNextShoot < 0) _timeUntilNextShoot = 0;
                 }
             }
-            else
-            {
-                _timeUntilNextShoot -= Time.deltaTime;
-                if (_timeUntilNextShoot < 0) _timeUntilNextShoot = 0;
-            }
-            
         }
         
         public void UpdateViewmodelPosition(Vector3 newPosition)

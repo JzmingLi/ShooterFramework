@@ -35,6 +35,7 @@ namespace Player
             _weaponController = GetComponent<WeaponController>();   
             
             _aim = input.FindActionMap("Player").FindAction("Aim");
+            _shoot = input.FindActionMap("PLayer").FindAction("Attack");
             _openMenu = input.FindActionMap("Player").FindAction("OpenMenu");
             _closeMenu = input.FindActionMap("UI").FindAction("CloseMenu");
             
@@ -68,8 +69,11 @@ namespace Player
                 input.FindActionMap("Player").Enable();
                 input.FindActionMap("UI").Disable();
             }
-            
-            if (_)
+
+            if (_shoot.IsPressed())
+            {
+                _weaponController.Shoot();
+            }
         }
     }
 }

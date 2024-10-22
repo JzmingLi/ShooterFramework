@@ -24,6 +24,9 @@ namespace WeaponFramework
         public Weapon Weapon {  get; private set; }
 
         private float _timeUntilNextShoot;
+
+        public event Action OutofAmmo;
+        public event Action Reloaded;
         
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -68,6 +71,10 @@ namespace WeaponFramework
                         Destroy(bullet, 5f);
                         _timeUntilNextShoot = 1 / (Weapon.FireRate / 60);
                     }
+                    else
+                    {
+                        OutofAmmo?.Invoke();
+                    }
                 }
                 else
                 {
@@ -82,7 +89,6 @@ namespace WeaponFramework
             _viewpos.localPosition = Vector3.Lerp(_viewpos.localPosition, newPosition, Time.deltaTime * aimSpeed);
         }
         
-        // For now basically throws current weapon into limbo for garbage colletion
         public void SwitchWeapon(Weapon weapon)
         {
             Weapon = weapon;
@@ -97,6 +103,7 @@ namespace WeaponFramework
                 aimPoint = weapon.AimPoint;
                 Weapon.Model.transform.SetParent(viewmodel.transform, false);
                 sightPosition = -viewmodel.transform.InverseTransformPoint(aimPoint.position);
+                Reloaded?.Invoke();
             }
             else
             {

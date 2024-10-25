@@ -34,7 +34,7 @@ namespace SingletonPattern
             {
                 Debug.Log("Destroyed Duplicate" + this.gameObject.name);
                 Debug.Log(_instance.gameObject.name);
-                //Destroy(gameObject);
+                Destroy(gameObject);
             }
         }
     }

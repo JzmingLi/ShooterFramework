@@ -23,15 +23,18 @@ namespace SingletonPattern
         }
         public virtual void Awake()
         {
+            Debug.Log(this.gameObject.name + " is Awake");
             // Remove Duplicates
             if (_instance == null)
             {
                 _instance = this as T;
                 DontDestroyOnLoad(gameObject);
             }
-            else
+            else if (_instance != this)
             {
-                Destroy(gameObject);
+                Debug.Log("Destroyed Duplicate" + this.gameObject.name);
+                Debug.Log(_instance.gameObject.name);
+                //Destroy(gameObject);
             }
         }
     }

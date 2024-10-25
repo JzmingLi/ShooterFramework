@@ -12,4 +12,21 @@ namespace WeaponFramework
         Burst,
         Manual,
     }
+
+    public enum Malfunction
+    {
+        Misfire
+    }
+
+    public enum AttachmentType
+    {
+        Sight,
+        Gadget,
+        Stock,
+        Grip,
+        ForeGrip,
+        HandGuard,
+        Muzzle,
+        Barrel
+    }
 }

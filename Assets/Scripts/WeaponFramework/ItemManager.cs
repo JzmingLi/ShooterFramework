@@ -12,5 +12,6 @@ namespace WeaponFramework
         [SerializeField] public List<GameObject> sights;
         [SerializeField] public List<MagData> mags;
         [SerializeField] public List<AmmoType> ammoTypes;
+        [SerializeField] public GameObject alertPrefab;
     }
 }

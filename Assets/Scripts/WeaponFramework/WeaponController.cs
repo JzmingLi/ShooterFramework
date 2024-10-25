@@ -4,6 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using WeaponFramework.Factories;
+using WeaponFramework.ObserversAndSubjects;
 
 namespace WeaponFramework
 {
@@ -24,9 +26,10 @@ namespace WeaponFramework
         public Weapon Weapon {  get; private set; }
 
         private float _timeUntilNextShoot;
-
-        public event Action OutofAmmo;
-        public event Action Reloaded;
+        private bool _outOfAmmo;
+        public WeaponSubject Subject;
+        
+        
         
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -36,6 +39,8 @@ namespace WeaponFramework
             
             _stateMachine = new WeaponStateMachine(this);
             _stateMachine.Initialize(_stateMachine.IdleState);
+
+            Subject = new WeaponSubject();
         }
 
         // Update is called once per frame
@@ -66,14 +71,16 @@ namespace WeaponFramework
                     AmmoType round = Weapon.Mag.TakeRound();
                     if (round)
                     {
-                        GameObject bullet = Instantiate(round.projectilePrefab, Weapon.Muzzle.position, mainCamera.transform.rotation);
-                        bullet.GetComponent<Rigidbody>().linearVelocity = Weapon.Muzzle.transform.forward * 50f;
-                        Destroy(bullet, 5f);
+                        ProjectileFactory.SpawnBullet(round, Weapon, 5);
                         _timeUntilNextShoot = 1 / (Weapon.FireRate / 60);
                     }
                     else
                     {
-                        OutofAmmo?.Invoke();
+                        if (!_outOfAmmo)
+                        {
+                            _outOfAmmo = true;
+                            Subject.NotifyOutofAmmo();
+                        }
                     }
                 }
                 else
@@ -103,7 +110,8 @@ namespace WeaponFramework
                 aimPoint = weapon.AimPoint;
                 Weapon.Model.transform.SetParent(viewmodel.transform, false);
                 sightPosition = -viewmodel.transform.InverseTransformPoint(aimPoint.position);
-                Reloaded?.Invoke();
+                _outOfAmmo = false;
+                Subject.NotifyReloaded();
             }
             else
             {

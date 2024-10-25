@@ -1,16 +1,19 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using WeaponFramework;
+using WeaponFramework.ObserversAndSubjects;
 
 namespace UserInterface.HUD
 {
     public class AlertObserver : MonoBehaviour
     {
-        [SerializeField] private WeaponController subject;
-        
-        
+        [SerializeField] private WeaponController weaponController;
+        private WeaponSubject _subject;
+
         private void OutofAmmo()
         {
+            Debug.Log("Out of Ammo, Displaying to hud");
             HUDManager.Instance.Alert("Out of Ammo");
         }
 
@@ -18,21 +21,22 @@ namespace UserInterface.HUD
         {
             HUDManager.Instance.Alert("");
         }
-        private void Awake()
+        private void Start()
         {
-            if (subject != null)
+            _subject = weaponController.Subject;
+            if (_subject != null)
             {
-                subject.OutofAmmo += OutofAmmo;
-                subject.Reloaded += Reloaded;
+                _subject.OutofAmmo += OutofAmmo;
+                _subject.Reloaded += Reloaded;
             }
         }
 
         private void OnDestroy()
         {
-            if (subject != null)
+            if (_subject != null)
             {
-                subject.OutofAmmo -= OutofAmmo;
-                subject.Reloaded -= Reloaded;
+                _subject.OutofAmmo -= OutofAmmo;
+                _subject.Reloaded -= Reloaded;
             }
         }
     }

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cartridgeSize: 0
   projectilePrefab: {fileID: 4889717936713801830, guid: 8654a24ae82f1a24c8f891f799343b8c, type: 3}
+  baseVelocity: 3500

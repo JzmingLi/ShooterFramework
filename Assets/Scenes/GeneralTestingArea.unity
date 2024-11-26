@@ -413,6 +413,22 @@ PrefabInstance:
       propertyPath: alertPrefab
       value: 
       objectReference: {fileID: 8612044865382438184, guid: 9397c6f027e165e40a30e45a138d8a12, type: 3}
+    - target: {fileID: 7984405067276244490, guid: 1e1399939c099db4fa8223ad3d507ced, type: 3}
+      propertyPath: mags.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7984405067276244490, guid: 1e1399939c099db4fa8223ad3d507ced, type: 3}
+      propertyPath: 'mags.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: ebdc34dcd2d21f24db8a4992f8de80ca, type: 2}
+    - target: {fileID: 7984405067276244490, guid: 1e1399939c099db4fa8223ad3d507ced, type: 3}
+      propertyPath: weapons.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7984405067276244490, guid: 1e1399939c099db4fa8223ad3d507ced, type: 3}
+      propertyPath: 'weapons.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a45b0d2deaa474c4eb2713ffe588be6e, type: 2}
     - target: {fileID: 8960504146823759687, guid: 1e1399939c099db4fa8223ad3d507ced, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1250,9 +1266,10 @@ MonoBehaviour:
   aimPoint: {fileID: 0}
   idleOffset: {x: 0.23, y: -0.29, z: 0.69}
   idleRotation: {x: 0, y: 0, z: 0, w: 0}
-  aimOffset: {x: 0, y: 0, z: 0}
+  aimOffset: {x: 0, y: 0, z: 0.2}
   sightPosition: {x: 0, y: 0, z: 0}
   aimSpeed: 10
+  UseFlyweight: 0
 --- !u!114 &834007814
 MonoBehaviour:
   m_ObjectHideFlags: 0

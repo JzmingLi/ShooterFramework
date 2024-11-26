@@ -8,6 +8,6 @@ public class BulletFlyweight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(transform.forward * (Time.deltaTime * ammoType.baseVelocity));
+        transform.position += transform.forward * (Time.deltaTime * ammoType.baseVelocity);
     }
 }

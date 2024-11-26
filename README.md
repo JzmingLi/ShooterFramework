@@ -1,14 +1,37 @@
 # Team 8 - James Li 100876994
 I am working alone for this assignment so my contribution is 100%. All the models and code are created by me.
 
-# What was done and how?
-The current build contains the following features:
-- HUD and prefab managers implemented using the singleton design pattern
-- A weapon modification menu that allows players to a create a weapon from one rifle, two sights, and two magazines. This was implemented using the factory design pattern and uses the singleton managers.
-- An undo system that can revert the player's weapon back to a previously equipped weapon made in the weapon modification menu. This was done using the command design pattern.
-- A HUD notification appears when the player runs out of ammo. This was done using the observer design pattern.
+# Design Pattern Improvements
 
-A more in depth explanation is included in the video of my submission.
+Factory
+- With the addition of the flyweight projectiles, the ammo factory now has the option to spawn flyweight or the original projectiles which helps me with showing the performance impact when I'm doing the profiling part
+- Originally, had factories for the Weapons and Alerts
+
+Observer
+- No changes
+- Used to notify HUD when player is out of ammo
+
+Command
+- No changes
+- Reiterating, it was used to store equipped weapons for undoing
+- Stored in a list so that I could limit the undo steps
+
+Singleton
+- No changes
+- HUD Manager and Item Manager
+- Useful because I want easy access to them similar to that of static classes, but static classes can't have serializable fields 
+- They use serializable fields for me to hold game objects like weapons, attachments, ammo types, and menus for other classes to access
+
+Optimization
+- Flyweight bullet takes values from AmmoType scriptable object
+
+DLL
+- I created a C# DLL that contains the methods for calculating recoil
+- Theoretically this would allow the recoil behaviour to be changed through changing the DLL
+
+Profiling
+- Flyweight reduced bullet script memory usage by 8 bytes
+
 
 # The Scenario
 The purpose of the scenario is to provide a demo for a feature-rich, reusable FPS game framework I'm creating for the individual project assignment in GDW 5. 

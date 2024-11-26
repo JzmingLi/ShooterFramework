@@ -38,8 +38,8 @@ namespace WeaponFramework
         private float _timeUntilNextShoot;
         private bool _outOfAmmo;
         public WeaponSubject Subject;
-        
-        
+
+        public bool UseFlyweight;
         
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -85,7 +85,8 @@ namespace WeaponFramework
                     AmmoType round = Weapon.Mag.TakeRound();
                     if (round)
                     {
-                        ProjectileFactory.SpawnBullet(round, Weapon, 5);
+                        if (UseFlyweight) ProjectileFactory.SpawnFlyweightBullet(round, Weapon, 5);
+                        else ProjectileFactory.SpawnBullet(round, Weapon, 5);
                         _timeUntilNextShoot = 1 / (Weapon.FireRate / 60);
                         _recoilSystem.ResetRecoilTime();
                     }

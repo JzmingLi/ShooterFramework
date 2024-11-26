@@ -9,11 +9,24 @@ namespace WeaponFramework.Factories
         {
             Transform muzzle = source.Muzzle;
             GameObject newBullet = GameObject.Instantiate(ammoType.projectilePrefab, muzzle.position, muzzle.rotation);
-            Rigidbody rb = newBullet.GetComponent<Rigidbody>();
-            float force = rb.mass * ammoType.baseVelocity;
-            
-            rb.AddForce(muzzle.forward * force, ForceMode.Impulse);
-            
+            newBullet.AddComponent<Bullet>();
+            Bullet bullet = newBullet.GetComponent<Bullet>();
+            bullet.baseVelocity = ammoType.baseVelocity;
+            bullet.cartridgeSize = ammoType.cartridgeSize;
+            bullet.projectilePrefab = newBullet;
+
+            GameObject.Destroy(newBullet, Lifetime);
+            return newBullet;
+        }
+        
+        public static GameObject SpawnFlyweightBullet(AmmoType ammoType, Weapon source, float Lifetime)
+        {
+            Transform muzzle = source.Muzzle;
+            GameObject newBullet = GameObject.Instantiate(ammoType.projectilePrefab, muzzle.position, muzzle.rotation);
+            newBullet.AddComponent<BulletFlyweight>();
+            BulletFlyweight bullet = newBullet.GetComponent<BulletFlyweight>();
+            bullet.ammoType = ammoType;
+
             GameObject.Destroy(newBullet, Lifetime);
             return newBullet;
         }

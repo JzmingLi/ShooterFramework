@@ -37,5 +37,6 @@ Profiling
 The purpose of the scenario is to provide a demo for a feature-rich, reusable FPS game framework I'm creating for the individual project assignment in GDW 5. 
 The framework itself is the focus of the scenario, having features such as a modular weapon system and varying types of ammunition.
 The user lacks a concrete goal to accomplish, but the scene will provide item spawners and dummies to allow them to explore the framework’s features.
+The final build only has weapon customization, procedural recoil, and shooting and aiming.
 
 ![ShooterFramework drawio (4)](https://github.com/user-attachments/assets/b63b5962-a9f8-4ebe-9439-3e0a3b9ea05c)

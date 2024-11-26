@@ -1269,7 +1269,7 @@ MonoBehaviour:
   aimOffset: {x: 0, y: 0, z: 0.2}
   sightPosition: {x: 0, y: 0, z: 0}
   aimSpeed: 10
-  UseFlyweight: 0
+  UseFlyweight: 1
 --- !u!114 &834007814
 MonoBehaviour:
   m_ObjectHideFlags: 0

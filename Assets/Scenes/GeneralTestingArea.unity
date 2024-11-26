@@ -1249,6 +1249,7 @@ MonoBehaviour:
   viewmodel: {fileID: 74510066}
   aimPoint: {fileID: 0}
   idleOffset: {x: 0.23, y: -0.29, z: 0.69}
+  idleRotation: {x: 0, y: 0, z: 0, w: 0}
   aimOffset: {x: 0, y: 0, z: 0}
   sightPosition: {x: 0, y: 0, z: 0}
   aimSpeed: 10

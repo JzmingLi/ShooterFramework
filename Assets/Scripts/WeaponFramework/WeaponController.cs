@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using Unity.Hierarchy;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -6,6 +7,9 @@ using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using WeaponFramework.Factories;
 using WeaponFramework.ObserversAndSubjects;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
+using RecoilSystemDLL;
 
 namespace WeaponFramework
 {
@@ -15,9 +19,15 @@ namespace WeaponFramework
         [SerializeField] private GameObject viewmodel;
         public Transform aimPoint;
         
+        // Viewmodel Offsets
         public Vector3 idleOffset;
+        public Quaternion idleRotation;
         public Vector3 aimOffset;
+        
+        // Positions for firing positions
         public Vector3 sightPosition;
+
+        private RecoilSystem _recoilSystem;
         
         [SerializeField] private float aimSpeed;
 
@@ -41,6 +51,10 @@ namespace WeaponFramework
             _stateMachine.Initialize(_stateMachine.IdleState);
 
             Subject = new WeaponSubject();
+            
+            idleRotation = Quaternion.identity;
+            
+            _recoilSystem = viewmodel.AddComponent<RecoilSystem>();
         }
 
         // Update is called once per frame
@@ -73,6 +87,7 @@ namespace WeaponFramework
                     {
                         ProjectileFactory.SpawnBullet(round, Weapon, 5);
                         _timeUntilNextShoot = 1 / (Weapon.FireRate / 60);
+                        _recoilSystem.ResetRecoilTime();
                     }
                     else
                     {
@@ -93,9 +108,10 @@ namespace WeaponFramework
         
         public void UpdateViewmodelPosition(Vector3 newPosition)
         {
-            _viewpos.localPosition = Vector3.Lerp(_viewpos.localPosition, newPosition, Time.deltaTime * aimSpeed);
+            _viewpos.localPosition = Vector3.Lerp(_viewpos.localPosition, newPosition + _recoilSystem._recoilPositionOffset, Time.deltaTime * aimSpeed);
+            _viewpos.localRotation = Quaternion.Lerp(_viewpos.localRotation, _recoilSystem._recoilRotationOffset, Time.deltaTime * aimSpeed);
         }
-        
+
         public void SwitchWeapon(Weapon weapon)
         {
             Weapon = weapon;
@@ -105,7 +121,7 @@ namespace WeaponFramework
                 Destroy(child.gameObject);
             }
             */
-            if(weapon != null)
+            if (weapon != null)
             {
                 aimPoint = weapon.AimPoint;
                 Weapon.Model.transform.SetParent(viewmodel.transform, false);
@@ -115,7 +131,7 @@ namespace WeaponFramework
             }
             else
             {
-                
+
                 Debug.Log("Equipped Nothing");
             }
         }

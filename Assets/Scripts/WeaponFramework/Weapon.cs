@@ -56,6 +56,7 @@ namespace WeaponFramework
             public bool CanFire; // Updated by shot cooldown
             
             public AmmoType ChamberedRound; // Currently loaded round
+            
         #endregion
         
         public Weapon(WeaponData baseData, GameObject model, Magazine magazine)
